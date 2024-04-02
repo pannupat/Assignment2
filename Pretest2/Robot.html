@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robot Walk</title>
+    <link rel="stylesheet" href="./Robot.css">
+</head>
+<body>
+    <h3>Robot Walk</h3>
+        <h4>คำสั่ง Robot Walk</h4>
+    <div class="container">
+        <input type="text" id="commandInput" >
+        <button onclick="executeCommand()">คำนวณ</button>
+        <div class="table-container">
+            <table id="outputTable">
+                <tr>
+                    <td id="pos00"></td>
+                    <td id="pos01"></td>
+                    <td id="pos02"></td>
+                </tr>
+                <tr>
+                    <td id="pos10"></td>
+                    <td id="pos11"></td>
+                    <td id="pos12"></td>
+                </tr>
+                <tr>
+                    <td id="pos20"></td>
+                    <td id="pos21"></td>
+                    <td id="pos22"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <script >
+        
+        let x = 0;
+        let y = 0;
+        let direction = 'N';
+
+function executeCommand() {
+    const command = document.getElementById('commandInput').value.toUpperCase();
+    switch(command) {
+        case 'L':
+            turnLeft();
+            break;
+        case 'R':
+            turnRight();
+            break;
+        case 'W':
+            moveForward();
+            break;
+        default:
+            console.log('คำสั่งผิด');
+    }
+    displayPosition();
+}
+
+function turnLeft() {
+    switch(direction) {
+        case 'N':
+            direction = 'W';
+            break;
+        case 'E':
+            direction = 'N';
+            break;
+        case 'S':
+            direction = 'E';
+            break;
+        case 'W':
+            direction = 'S';
+            break;
+    }
+}
+
+function turnRight() {
+    switch(direction) {
+        case 'N':
+            direction = 'E';
+            break;
+        case 'E':
+            direction = 'S';
+            break;
+        case 'S':
+            direction = 'W';
+            break;
+        case 'W':
+            direction = 'N';
+            break;
+    }
+}
+
+function moveForward() {
+    switch(direction) {
+        case 'N':
+            y++;
+            break;
+        case 'E':
+            x++;
+            break;
+        case 'S':
+            y--;
+            break;
+        case 'W':
+            x--;
+            break;
+    }
+}
+
+function displayPosition() {
+    const outputTable = document.getElementById('outputTable');
+    const positionId = 'pos' + x + y;
+    const currentPosition = document.getElementById(positionId);
+    currentPosition.innerHTML = "robot";
+}
+    </script>
+</body>
+</html>
